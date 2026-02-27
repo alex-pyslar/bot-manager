@@ -193,4 +193,14 @@
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+
+  /* Subtle card shadow on hover */
+  .hover\:shadow-md {
+    transition: box-shadow 0.15s ease;
+  }
+
+  /* code chips inside MdTextarea hints */
+  code {
+    font-feature-settings: 'liga' 0;
+  }
 }

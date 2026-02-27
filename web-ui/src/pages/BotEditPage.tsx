@@ -215,7 +215,7 @@ export default function BotEditPage() {
             <CardHeader>
               <CardTitle className="text-base">Сообщения</CardTitle>
               <CardDescription>
-                Вставьте обычный Markdown и нажмите <strong>MD → TG</strong> для авто-конвертации в Telegram MarkdownV2.
+                Пишите в обычном Markdown — форматирование применится автоматически при отправке.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -349,7 +349,9 @@ export default function BotEditPage() {
           </div>
 
           {update.isSuccess && (
-            <p className="text-sm text-green-600 dark:text-green-400 text-center">Сохранено!</p>
+            <p className="text-sm text-center text-green-600 dark:text-green-400 animate-in fade-in">
+              Сохранено
+            </p>
           )}
           {update.isError && (
             <p className="text-sm text-destructive text-center">

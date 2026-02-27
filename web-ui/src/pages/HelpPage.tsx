@@ -108,14 +108,13 @@ export default function HelpPage() {
         </Section>
 
         {/* Messages format */}
-        <Section title="Формат сообщений (MarkdownV2)" icon={<MessageSquare className="h-4 w-4" />}>
+        <Section title="Формат сообщений (Markdown)" icon={<MessageSquare className="h-4 w-4" />}>
           <div className="space-y-3 text-sm text-muted-foreground">
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/30 p-3 text-blue-700 dark:text-blue-400">
-              <strong>Совет:</strong> в полях сообщений есть кнопка <strong>MD → TG</strong>.
-              Вставьте обычный Markdown (как в Notion, GitHub и т.д.) и нажмите её —
-              текст автоматически конвертируется в правильный формат Telegram MarkdownV2.
+              <strong>Просто пишите обычный Markdown</strong> — система автоматически конвертирует его
+              в формат Telegram при отправке. Никакого ручного экранирования не требуется.
             </div>
-            <p>Сообщения используют формат <strong>MarkdownV2 Telegram</strong>. Основные правила:</p>
+            <p>Поддерживаемые элементы форматирования:</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm border-collapse">
                 <thead>
@@ -126,24 +125,20 @@ export default function HelpPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  <tr><td className="py-1.5 pr-4">Жирный</td><td className="pr-4"><code className="bg-muted px-1 rounded">*текст*</code></td><td><strong>текст</strong></td></tr>
-                  <tr><td className="py-1.5 pr-4">Курсив</td><td className="pr-4"><code className="bg-muted px-1 rounded">_текст_</code></td><td><em>текст</em></td></tr>
+                  <tr><td className="py-1.5 pr-4">Жирный</td><td className="pr-4"><code className="bg-muted px-1 rounded">**текст**</code></td><td><strong>текст</strong></td></tr>
+                  <tr><td className="py-1.5 pr-4">Курсив</td><td className="pr-4"><code className="bg-muted px-1 rounded">*текст*</code></td><td><em>текст</em></td></tr>
+                  <tr><td className="py-1.5 pr-4">Зачёркнутый</td><td className="pr-4"><code className="bg-muted px-1 rounded">~~текст~~</code></td><td><s>текст</s></td></tr>
                   <tr><td className="py-1.5 pr-4">Ссылка</td><td className="pr-4"><code className="bg-muted px-1 rounded">[текст](https://url)</code></td><td className="text-primary underline">текст</td></tr>
+                  <tr><td className="py-1.5 pr-4">Код</td><td className="pr-4"><code className="bg-muted px-1 rounded">`текст`</code></td><td><code className="bg-muted px-1 rounded">текст</code></td></tr>
                   <tr><td className="py-1.5 pr-4">Упоминание</td><td className="pr-4"><code className="bg-muted px-1 rounded">@username</code></td><td className="text-primary">@username</td></tr>
                 </tbody>
               </table>
             </div>
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/30 p-3 text-amber-700 dark:text-amber-400">
-              <strong>Обязательно экранируйте</strong> спецсимволы обратным слешем:
-              <code className="bg-amber-100 dark:bg-amber-900/50 px-1 rounded ml-1">! . ( ) - + = | [ ] {'{'} {'}'} # &gt;</code>
-              <br />
-              Например: <code className="bg-amber-100 dark:bg-amber-900/50 px-1 rounded">Привет\!</code> или <code className="bg-amber-100 dark:bg-amber-900/50 px-1 rounded">пункт 1\.</code>
-            </div>
             <div>
               <p className="font-medium text-foreground mb-1">Пример приветственного сообщения:</p>
-              <pre className="bg-muted rounded-lg p-3 text-xs overflow-x-auto whitespace-pre-wrap">{`*Привет\\!* 👋
+              <pre className="bg-muted rounded-lg p-3 text-xs overflow-x-auto whitespace-pre-wrap">{`**Привет!** 👋
 
-Я подготовил для тебя полезный материал\\. Чтобы забрать \\— подпишись на канал ➡️ @yourchannel
+Я подготовил для тебя полезный материал. Чтобы забрать — подпишись на канал ➡️ @yourchannel
 
 После подписки жми на кнопку 👇`}</pre>
             </div>

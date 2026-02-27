@@ -34,7 +34,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-2">
             <Bot className="h-10 w-10 text-primary" />
           </div>
-          <CardTitle>Bot Manager</CardTitle>
+          <CardTitle>Telematic</CardTitle>
           <CardDescription>Войдите для управления ботами</CardDescription>
         </CardHeader>
         <CardContent>

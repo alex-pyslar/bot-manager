@@ -17,20 +17,17 @@ import (
 	"bot-manager/internal/storage"
 )
 
-// normalizeText replaces literal \n escape sequences with real newlines.
-// Users often type \n in text fields expecting line breaks.
-func normalizeText(s string) string {
-	return strings.ReplaceAll(s, `\n`, "\n")
-}
-
-// sendMsg tries MarkdownV2; on parse error retries as plain text.
+// sendMsg converts Markdown to Telegram MarkdownV2 and sends the message.
+// On parse error, retries as plain text using the original (normalised) content.
 func sendMsg(bot *tgbotapi.BotAPI, logger *log.Logger, msg tgbotapi.MessageConfig) {
-	msg.Text = normalizeText(msg.Text)
+	original := strings.ReplaceAll(msg.Text, `\n`, "\n")
+	msg.Text = mdToTelegramV2(msg.Text)
 	msg.ParseMode = tgbotapi.ModeMarkdownV2
 	if _, err := bot.Send(msg); err != nil {
 		if strings.Contains(err.Error(), "can't parse entities") {
-			logger.Printf("MarkdownV2 parse error (отправляю как plain text): %v\nПроверьте текст сообщения — спецсимволы (! . - + = | { } ( ) # > ~ `) должны быть экранированы или используйте кнопку «MD → TG» в интерфейсе.", err)
+			logger.Printf("MarkdownV2 parse error (отправляю как plain text): %v", err)
 			msg.ParseMode = ""
+			msg.Text = original
 			if _, err2 := bot.Send(msg); err2 != nil {
 				logger.Printf("send message: %v", err2)
 			}
@@ -133,7 +130,7 @@ func sendWelcome(
 				Name:   "welcome.jpg",
 				Reader: rc,
 			})
-			photo.Caption = normalizeText(cfg.WelcomeMsg)
+			photo.Caption = mdToTelegramV2(cfg.WelcomeMsg)
 			photo.ParseMode = tgbotapi.ModeMarkdownV2
 			photo.ReplyMarkup = kb
 			_, sendErr := bot.Send(photo)

@@ -179,7 +179,7 @@ function Step2({ onBack, onNext, loading }: { onBack: () => void; onNext: (d: St
         <CardHeader>
           <CardTitle>Сообщения бота</CardTitle>
           <CardDescription>
-            Вставьте обычный Markdown и нажмите <strong>MD → TG</strong> — сервис автоматически конвертирует его в формат Telegram MarkdownV2.
+            Пишите в обычном Markdown — форматирование применится автоматически при отправке.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
